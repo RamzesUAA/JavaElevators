@@ -1,0 +1,6 @@
+<?import controls.BuildingControl?>
+
+<?import javafx.scene.layout.FlowPane?>
+<FlowPane
+           xmlns:fx="http://javafx.com/fxml">
+</FlowPane>
