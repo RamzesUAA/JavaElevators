@@ -95,7 +95,7 @@ public class FloorControl extends ScrollPane {
             tooltip.setShowDelay(new Duration(10));
             tooltip.setShowDuration(Duration.hours(1));
             tooltip.setAutoFix(true);
-            rect.setFill(elevatorColor);
+            rect.setFill(elevatorColor); // TODO: Set image instead of color
             stack.getChildren().removeAll(passengerCountView, currentWightView);
             passengerCountView = new Text(String.valueOf(_passengerCount));
             passengerCountView.setStyle("-fx-padding: 20px");

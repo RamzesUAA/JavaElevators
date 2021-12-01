@@ -10,6 +10,7 @@ import interactor.strategies.SecondStrategy;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
@@ -19,10 +20,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import start.Controller;
@@ -31,6 +33,17 @@ import viewModels.BuildingParameters;
 
 import java.io.IOException;
 import java.util.*;
+
+import static javax.swing.text.StyleConstants.Background;
+
+// Structure:
+// Scene |
+//       | VBox - vertical container
+//              | HBox - horizontal container
+//              | HBox - horizontal container
+//              | HBox - horizontal container
+
+
 
 public class StartPageControl extends VBox {
     private TextField liftCountField;
@@ -41,6 +54,9 @@ public class StartPageControl extends VBox {
     private int selected = 1;
     private BuildingParameters buildingParameters;
     private static Random r = new Random();
+
+    private static final String STANDARD_BUTTON_STYLE = "-fx-background-color: #FF7F50; -fx-border-color: grey; -fx-border-radius: 5;";
+    private static final String HOVERED_BUTTON_STYLE  = "-fx-background-color: #ff5a1d ; -fx-border-color: grey; -fx-border-radius: 5;";
 
     public StartPageControl(){
         buildingParameters = Main.getInjector().getInstance(BuildingParameters.class);
@@ -53,6 +69,19 @@ public class StartPageControl extends VBox {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+        // Background set
+//        BackgroundFill s= new BackgroundFill()
+        BackgroundFill backgroundFill =
+                new BackgroundFill(
+                        Color.valueOf("#FFA07A"),
+                        new CornerRadii(0),
+                        new Insets(0)
+                );
+        javafx.scene.layout.Background background =
+                new Background(backgroundFill);
+        setBackground(background);
+
+        // hBox - for horizontal align of elements
         HBox hBox = new HBox();
         setPadding(new Insets(5,5,5,5));
         FlowPane paramsPane = new FlowPane(Orientation.VERTICAL, 10, 10);
@@ -60,6 +89,7 @@ public class StartPageControl extends VBox {
 
         HBox.setMargin(strategyPane, new Insets(0,0,0,5));
         Label liftCountLabel = new Label("Кількість ліфтів:");
+        liftCountLabel.setFont(new Font(12));
         Label floorCountLabel = new Label("Кількість поверхів:");
         Label liftSpeedLabel = new Label("Швидкість ліфтів:");
         Label passengerCreationLabel = new Label("Максимальний час появи пасажира (мс):");
@@ -142,6 +172,9 @@ public class StartPageControl extends VBox {
         firstStrategyBtn.setOnAction(event -> selected = 1);
         secondStrategyBtn.setOnAction(event -> selected = 2);
         randomStrategyBtn.setOnAction(event -> selected = 3);
+
+
+
         firstStrategyBtn.widthProperty().addListener((observableValue, oldNumber, newNumber) -> {
             if(firstStrategyBtn.getWidth()!=0) {
                 var v1 = randomStrategyBtn.getWidth() - firstStrategyBtn.getWidth();
@@ -170,16 +203,36 @@ public class StartPageControl extends VBox {
         strategyPane.getChildren().addAll(firstStrategyBox,secondStrategyBox);
         strategyPane.getChildren().add(randomStrategyBtn);
         hBox.getChildren().add(strategyPane);
-        hBox.setFillHeight(false);
         hBox.setPrefHeight(150);
-        hBox.setAlignment(Pos.TOP_CENTER);
+
+         // Here we set containers alignment to center
+        hBox.setAlignment(Pos.CENTER);
         setSpacing(5);
-        setAlignment(Pos.TOP_CENTER);
+        setAlignment(Pos.CENTER);
         getChildren().add(hBox);
+
+        // Button styles
         Button start = new Button("Поїхали!");
+        Font font = Font.font("Courier New", FontWeight.BOLD, 25);
+        start.setFont(font);
+        start.setStyle(STANDARD_BUTTON_STYLE);
+
+        start.setOnMouseEntered(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                start.setStyle(HOVERED_BUTTON_STYLE);
+            }
+        });
+        start.setOnMouseExited(new EventHandler<MouseEvent>() {
+            @Override public void handle(MouseEvent mouseEvent) {
+                start.setStyle(STANDARD_BUTTON_STYLE);
+            }
+        });
+
         start.setOnAction(this::OnStart);
         getChildren().add(start);
     }
+
+
 
     private static void ToStart(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.SPACE) {

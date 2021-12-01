@@ -1,6 +1,10 @@
 package start;
 
 import di.MainModule;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
+import javafx.scene.paint.Stop;
 import pages.StartPageControl;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -30,9 +34,11 @@ public class Main extends Application {
         Parent root = new StartPageControl();
         primaryStage.setTitle("liftEr");
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root,500,175));
+        var scene = new Scene(root,700,500, Color.CHOCOLATE);
+        scene.setFill(Color.web("#81c483"));
+        primaryStage.setScene(scene);
         primaryStage.show();
-//        primaryStage.getIcons().add( new Image(getClass().getResource("/LiftErIcon.png").toExternalForm()));
+
         primaryStage.setOnCloseRequest(t -> {
             Platform.exit();
             System.exit(0);
