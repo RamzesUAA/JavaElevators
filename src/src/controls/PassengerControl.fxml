@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<fx:root type="javafx.scene.shape.Ellipse" xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml">
+
+<fx:root arcHeight="10.0" arcWidth="10.0" type="javafx.scene.shape.Rectangle" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1">
 
 </fx:root>

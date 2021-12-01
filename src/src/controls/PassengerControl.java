@@ -2,15 +2,18 @@ package controls;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.Random;
 
-public class PassengerControl extends Ellipse {
+public class PassengerControl extends Rectangle {
     String id;
 
     public PassengerControl(String id, int floorToGo, double weight){
@@ -23,12 +26,12 @@ public class PassengerControl extends Ellipse {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-        setRadiusY(25);
-        setRadiusX(10);
-        setStroke(Color.grayRgb(5));
-        setStrokeType(StrokeType.INSIDE);
+        setWidth(50);
+        setHeight(50);
         var r = new Random(id.hashCode());
-        setFill(Color.rgb(r.nextInt(255), r.nextInt(255), r.nextInt(255)));
+        var s = new Image(getClass().getResource("../src/controls/Girl.png").toExternalForm());
+        setFill(new ImagePattern(s));
+
         var tooltip = new Tooltip(String.format("My id = %s \nMy weight = %.2f \nI want to get to the %d th floor",
                 id,
                 weight,

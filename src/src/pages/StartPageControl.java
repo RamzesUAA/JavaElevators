@@ -18,6 +18,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
@@ -62,6 +63,9 @@ public class StartPageControl extends VBox {
         buildingParameters = Main.getInjector().getInstance(BuildingParameters.class);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../src/pages/StartPage.fxml"));
+//        var loader = new FXMLLoader(getClass().getResource("../src/pages/TractionElevator.png"));
+//        var sqq =  new Image(getClass().getResource("../src/pages/TractionElevator.png").toExternalForm());
+
         loader.setRoot(this);
         loader.setController(this);
         try {
@@ -81,6 +85,7 @@ public class StartPageControl extends VBox {
                 new Background(backgroundFill);
         setBackground(background);
 
+
         // hBox - for horizontal align of elements
         HBox hBox = new HBox();
         setPadding(new Insets(5,5,5,5));
@@ -93,9 +98,8 @@ public class StartPageControl extends VBox {
         Label floorCountLabel = new Label("Кількість поверхів:");
         Label liftSpeedLabel = new Label("Швидкість ліфтів:");
         Label passengerCreationLabel = new Label("Максимальний час появи пасажира (мс):");
+
         liftCountField = new TextField("10");
-        floorCountField = new TextField("10");
-        passengerCreationField = new TextField("1500");
         liftCountField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 liftCountField.setText(newValue.replaceAll("[^\\d]", ""));
@@ -104,6 +108,9 @@ public class StartPageControl extends VBox {
                 liftCountField.setText(String.valueOf(10));
             }
         });
+
+        floorCountField = new TextField("10");
+
         floorCountField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 floorCountField.setText(newValue.replaceAll("[^\\d]", ""));
@@ -112,6 +119,8 @@ public class StartPageControl extends VBox {
                 floorCountField.setText(String.valueOf(100));
             }
         });
+
+        passengerCreationField = new TextField("1500");
         passengerCreationField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue.matches("\\d*")) {
                 liftCountField.setText(newValue.replaceAll("[^\\d]", ""));
@@ -120,9 +129,13 @@ public class StartPageControl extends VBox {
                 liftCountField.setText(String.valueOf(10000));
             }
         });
+
+
         liftCountField.setPrefWidth(80);
         floorCountField.setPrefWidth(80);
         passengerCreationField.setPrefWidth(80);
+
+
         HBox liftCountBox = new HBox();
         liftCountBox.getChildren().addAll(liftCountLabel, liftCountField);
         HBox floorCountBox = new HBox();
@@ -145,6 +158,7 @@ public class StartPageControl extends VBox {
                     throw new IllegalStateException("Unexpected value: " + speedList.indexOf(s));
             }
         });
+
         speedChoice.setValue(speedList.get(1));
         speedBox.getChildren().addAll(liftSpeedLabel, speedChoice);
         HBox.setMargin(passengerCreationLabel, new Insets(3,5,0,0));
@@ -159,7 +173,11 @@ public class StartPageControl extends VBox {
         HBox passengerBox = new HBox();
         passengerBox.getChildren().addAll(passengerCreationLabel, passengerCreationField);
 
-        paramsPane.getChildren().addAll(liftCountBox, floorCountBox, speedBox, passengerBox);
+
+        HBox starBox = new HBox();
+        starBox.getChildren().addAll(passengerCreationLabel, passengerCreationField);
+
+        paramsPane.getChildren().addAll(liftCountBox, floorCountBox, speedBox, passengerBox, starBox);
         hBox.getChildren().add(paramsPane);
 
         RadioButton firstStrategyBtn = new RadioButton("Перша стратегія");
@@ -198,9 +216,14 @@ public class StartPageControl extends VBox {
         secondStrategyColorPicker.setValue(Color.LIGHTBLUE);
         HBox firstStrategyBox = new HBox();
         firstStrategyBox.getChildren().addAll(firstStrategyBtn, firstStrategyColorPicker);
+
+
+
         HBox secondStrategyBox = new HBox();
         secondStrategyBox.getChildren().addAll(secondStrategyBtn, secondStrategyColorPicker);
         strategyPane.getChildren().addAll(firstStrategyBox,secondStrategyBox);
+
+
         strategyPane.getChildren().add(randomStrategyBtn);
         hBox.getChildren().add(strategyPane);
         hBox.setPrefHeight(150);

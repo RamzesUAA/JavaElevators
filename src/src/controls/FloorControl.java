@@ -1,5 +1,7 @@
 package controls;
 
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 import viewModels.PassengerViewModel;
 import data.Passenger;
 import javafx.application.Platform;
@@ -95,7 +97,10 @@ public class FloorControl extends ScrollPane {
             tooltip.setShowDelay(new Duration(10));
             tooltip.setShowDuration(Duration.hours(1));
             tooltip.setAutoFix(true);
-            rect.setFill(elevatorColor); // TODO: Set image instead of color
+//            rect.setFill(elevatorColor); // TODO: Set image instead of color
+            var s = new Image(getClass().getResource("../src/controls/TractionElevator.png").toExternalForm());
+            rect.setFill(new ImagePattern(s));
+
             stack.getChildren().removeAll(passengerCountView, currentWightView);
             passengerCountView = new Text(String.valueOf(_passengerCount));
             passengerCountView.setStyle("-fx-padding: 20px");

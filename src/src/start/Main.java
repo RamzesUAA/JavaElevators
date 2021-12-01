@@ -39,6 +39,8 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
+        primaryStage.getIcons().add( new Image(getClass().getResource("../src/pages/TractionElevator.png").toExternalForm()));
+
         primaryStage.setOnCloseRequest(t -> {
             Platform.exit();
             System.exit(0);

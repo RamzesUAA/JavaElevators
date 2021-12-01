@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public abstract class ObservableHistory<E, I> extends Observable<E> {
+public abstract class ObservableHistory<E, I> extends common.Observable<E> {
 
     protected List<I> historyList = new ArrayList<>();
 
@@ -14,8 +14,8 @@ public abstract class ObservableHistory<E, I> extends Observable<E> {
         super.subscribe(value);
         try {
             for (I item : historyList) {
-                if (value instanceof CallbackAble)
-                    ((CallbackAble<I>) value).executeCallback(item);
+                if (value instanceof common.CallbackAble)
+                    ((common.CallbackAble<I>) value).executeCallback(item);
             }
         }catch (Exception e)
         {

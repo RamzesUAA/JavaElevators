@@ -19,6 +19,7 @@
                 </excludes>
                 <includes>
                     <include>**/*.fxml</include>
+                    <include>**/*.png</include>
                 </includes>
             </resource>
         </resources>
