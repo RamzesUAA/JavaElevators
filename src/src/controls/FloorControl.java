@@ -1,6 +1,7 @@
 package controls;
 
 import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.ImagePattern;
 import viewModels.PassengerViewModel;
 import data.Passenger;
@@ -11,8 +12,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tooltip;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
@@ -58,7 +57,20 @@ public class FloorControl extends ScrollPane {
         waitingPassengersPane.setFitToHeight(true);
         waitingPassengersPane.setFitToWidth(true);
         waitingPassengersBox = new HBox();
+        BackgroundFill backgroundFill =
+                new BackgroundFill(
+                        Color.valueOf("#E9A6A6"),
+                        new CornerRadii(0),
+                        new Insets(0)
+                );
+        javafx.scene.layout.Background background =
+                new Background(backgroundFill);
+        setBackground(background);
+
+        waitingPassengersBox.setBackground(background);
         leavingPassengersBox = new HBox();
+        leavingPassengersBox.setBackground(background);
+
         leavingPassengersBox.setAlignment(Pos.TOP_RIGHT);
         waitingPassengersPane.setContent(waitingPassengersBox);
         leavingPassengersPane.setContent(leavingPassengersBox);
@@ -70,6 +82,9 @@ public class FloorControl extends ScrollPane {
         setMinViewportHeight(55);
         setFitToHeight(true);
         setFitToWidth(true);
+
+
+
         rect = new Rectangle(50, 50, Color.DIMGRAY);
         rect.setArcHeight(5);
         rect.setArcWidth(5);

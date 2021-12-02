@@ -305,7 +305,9 @@ public class StartPageControl extends VBox {
         Scene scene = new Scene(root);
         scene.setOnKeyPressed(StartPageControl::ToStart);
         stage.setScene(scene);
-        stage.setMaximized(true);
-        stage.setResizable(true);
+
+
+//        stage.setMaximized(true);
+//        stage.setResizable(true);
     }
 }
