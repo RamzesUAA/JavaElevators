@@ -28,9 +28,17 @@ public class PassengerControl extends Rectangle {
         }
         setWidth(50);
         setHeight(50);
-        var r = new Random(id.hashCode());
-        var s = new Image(getClass().getResource("../src/controls/Girl.png").toExternalForm());
-        setFill(new ImagePattern(s));
+        var r = getRandomNumber(1,3);
+        if(r == 1)
+        {
+            var s = new Image(getClass().getResource("../src/controls/Boy.png").toExternalForm());
+            setFill(new ImagePattern(s));
+        }else{
+            var s = new Image(getClass().getResource("../src/controls/Girl.png").toExternalForm());
+            setFill(new ImagePattern(s));
+
+
+        }
 
         var tooltip = new Tooltip(String.format("My id = %s \nMy weight = %.2f \nI want to get to the %d th floor",
                 id,
@@ -41,7 +49,9 @@ public class PassengerControl extends Rectangle {
         tooltip.setAutoFix(true);
         Tooltip.install(this, tooltip);
     }
-
+    public int getRandomNumber(int min, int max) {
+        return (int) ((Math.random() * (max - min)) + min);
+    }
     public String getID() {
         return id;
     }
