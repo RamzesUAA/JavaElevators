@@ -206,21 +206,15 @@ public class StartPageControl extends VBox {
             }
         });
         firstStrategyBtn.setSelected(true);
-        ColorPicker firstStrategyColorPicker = new ColorPicker();
-        firstStrategyColorPicker.valueProperty().addListener((observableValue, color, t1) -> firstStrategyColor = firstStrategyColorPicker.getValue());
-        firstStrategyColorPicker.setStyle("-fx-color-label-visible: false ;");
-        firstStrategyColorPicker.setValue(Color.GREENYELLOW);
-        ColorPicker secondStrategyColorPicker = new ColorPicker();
-        secondStrategyColorPicker.setStyle("-fx-color-label-visible: false ;");
-        secondStrategyColorPicker.valueProperty().addListener((observableValue, color, t1) -> secondStrategyColor = secondStrategyColorPicker.getValue());
-        secondStrategyColorPicker.setValue(Color.LIGHTBLUE);
+
+
         HBox firstStrategyBox = new HBox();
-        firstStrategyBox.getChildren().addAll(firstStrategyBtn, firstStrategyColorPicker);
+        firstStrategyBox.getChildren().addAll(firstStrategyBtn);
 
 
 
         HBox secondStrategyBox = new HBox();
-        secondStrategyBox.getChildren().addAll(secondStrategyBtn, secondStrategyColorPicker);
+        secondStrategyBox.getChildren().addAll(secondStrategyBtn);
         strategyPane.getChildren().addAll(firstStrategyBox,secondStrategyBox);
 
 
